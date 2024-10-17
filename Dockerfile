@@ -1,7 +1,12 @@
 FROM debian:bullseye
 
+
+
+
 # Install git, supervisor, VNC, & X11 packages
 RUN set -ex; \
+    
+    
     apt-get update; \
     apt-get install -y \
       bash \
@@ -13,6 +18,10 @@ RUN set -ex; \
       x11vnc \
       xterm \
       xvfb
+    wget https://github.com/kasmtech/KasmVNC/releases/download/v1.3.2/kasmvncserver_bullseye_1.3.2_arm64.deb
+    apt-get install ./kasmvncserver_*.deb
+    sudo adduser $USER ssl-cert
+
 
 # Setup demo environment variables
 ENV HOME=/root \
